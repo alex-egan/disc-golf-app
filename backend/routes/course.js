@@ -1,6 +1,7 @@
 const router = require("express").Router();
+const mongoose = require("mongoose");
 let Course = require('../models/Course');
- 
+
 // This section will help you get a list of all the records.
 router.route("/").get(function (req, res) {
   Course.find()
@@ -9,8 +10,11 @@ router.route("/").get(function (req, res) {
 });
 
 router.route('/add').post((req, res) => {
+  console.log(mongoose.connection.readyState)
+
   const name = req.body.name;
   const location = req.body.location;
+  const description = req.body.description;
   const currentLayout = req.body.currentLayout;
   const createdOn = Date.now();
   const createdBy = "afegan";
@@ -18,7 +22,9 @@ router.route('/add').post((req, res) => {
   const updatedBy = "afegan";
   const alternateLayouts = req.body.alternateLayouts;
 
-  const newCourse = new Course({name, location, currentLayout, createdOn, createdBy, updatedOn, updatedBy, alternateLayouts});
+  const newCourse = new Course({name, location, description, currentLayout, createdOn, createdBy, updatedOn, updatedBy, alternateLayouts});
+
+  console.log(newCourse);
 
   newCourse.save()
       .then(() => res.json('Course added'))
@@ -43,6 +49,7 @@ router.route('/update/:id').post((req, res) => {
       .then(course => {
           course.name = req.body.name;
           course.location = req.body.location;
+          course.description = req.body.description;
           course.currentLayout = req.body.currentLayout;
           course.updatedOn = Date.now();
           course.alternateLayouts = req.body.alternateLayouts;

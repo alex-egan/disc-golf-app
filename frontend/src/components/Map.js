@@ -13,12 +13,12 @@ function Map() {
     const [zoom, setZoom] = useState(9);
 
     function Marker(course) {
-        console.log(course);
         return (
             `<div className="marker">
                 <h3>${course.name}</h3>
                 <div>${course.location.address}</div>
                 <div>${course.description}</div>
+                <button onClick="window.location.replace('/courses/${course._id}')">Go To Course</button>
             </div>`
         );
       }

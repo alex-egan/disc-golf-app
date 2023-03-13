@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { ReactSession } from 'react-client-session';
+import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Map from './components/Map';
 import Course from './components/Course';
@@ -7,6 +9,8 @@ import Home from './components/Home';
 import './App.css';
 
 function App() {
+  ReactSession.setStoreType("localStorage");
+
   return (
     <div className="page">
       <header className="header">
@@ -16,6 +20,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home></Home>} />
+            <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/courses/:id" element={<Course></Course>} />
             <Route path="/map" element={<Map></Map>} />
           </Routes>

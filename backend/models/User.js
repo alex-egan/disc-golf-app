@@ -2,20 +2,9 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        unique: true,
-        trim: true,
-        minlength: 3
-    },
-    currentRound: {type: roundSchema},
-    roundHistory: [roundSchema],
-    createdOn: {type: Date, required: true},
-    updatedOn: {type: Date}
-}, {
-    timestamps: true,
+const holeSchema = new Schema({
+    number: {type: Number, required: true},
+    score: {type: Number, required: true}
 });
 
 const roundSchema = new Schema({
@@ -27,9 +16,20 @@ const roundSchema = new Schema({
     updatedOn: {type: Date},
 });
 
-const holeSchema = new Schema({
-    number: {type: Number, required: true},
-    score: {type: Number, required: true}
+const userSchema = new Schema({
+    username: {
+        type: String,
+        required: true,
+        unique: true,
+        trim: true,
+        minlength: 3
+    },
+    currentRound: {type: roundSchema},
+    roundHistory: [roundSchema],
+    createdOn: {type: Date},
+    updatedOn: {type: Date}
+}, {
+    timestamps: true,
 });
 
 const User = mongoose.model('User', userSchema);

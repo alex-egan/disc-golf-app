@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ReactSession } from 'react-client-session';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,9 +14,11 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
 const pages = ['Courses', 'Map'];
+const loginMenu = [ 'Login' ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 function ResponsiveAppBar() {
+  const [user, setUser] = React.useState(null);
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -38,12 +41,22 @@ function ResponsiveAppBar() {
   const navigateToPage = (page) => {
     console.log(page);
     if (page == "Courses")
-      window.location.replace(`/courses`)
+      window.location.replace(`/courses`);
     else if (page == "Map")
-      window.location.replace(`/map`)
+      window.location.replace(`/map`);
+    else if (page == "Login")
+      window.location.replace(`/login`);
 
     setAnchorElNav(null);
   };
+
+  useEffect(() => {
+    let user = ReactSession.get("username");
+    console.log(user);
+    if (user != null) {
+      setUser(user);
+    }
+  });
 
   return (
     <AppBar position="static">
@@ -125,7 +138,7 @@ function ResponsiveAppBar() {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={(() => navigateToPage(page))}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page}
@@ -155,11 +168,16 @@ function ResponsiveAppBar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
-                </MenuItem>
-              ))}
+              {(user == null) ? 
+                loginMenu.map((item) => 
+                  <MenuItem key={item} onClick={(() => navigateToPage(item))}>
+                    <Typography textAlign="center">{item}</Typography>
+                  </MenuItem>) : 
+                settings.map((setting) => (
+                  <MenuItem key={setting} onClick={(() => navigateToPage(setting))}>
+                    <Typography textAlign="center">{setting}</Typography>
+                  </MenuItem> ))
+              }
             </Menu>
           </Box>
         </Toolbar>

@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 function Course() {
     const { id } = useParams(); 
     const [course, setCourse] = useState({});
+    const [playerHistory, setPlayerHistory] = useState({});
 
     useEffect(() => {
         console.log(id);
@@ -21,6 +22,28 @@ function Course() {
             <div className="col-sm">
                 <h3>{course.name}</h3>
             </div>
+        </div>
+        <div className="row holes">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hole #</th>
+                        <th>Par</th>
+                        <th>Length</th>
+                        <th>Average Score</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {course.currentLayout.holes.forEach(hole => {
+                        <tr>
+                            <td>{hole.number}</td>
+                            <td>{hole.holeLayouts.par}</td>
+                            <td>{hole.holeLayouts.length}</td>
+                            <td>{hole.number}</td>
+                        </tr>
+                    })}
+                </tbody>
+            </table>
         </div>
         <div className="row info"></div>
       </div>

@@ -62,7 +62,7 @@ function Rounds() {
       }}
     >
       <Box sx={{display:'flex', color: 'text.secondary' }}>Hole 1
-      <Button sx={{width:25%}}>Button </Button>
+      <Button sx={{}}>Button </Button>
     </Box>
       <Box sx={{ color: 'text.primary', fontSize: 34, fontWeight: 'medium' }}>
         <Typography sx={{justifyContent:'center',display:'flex'}}>{counter}</Typography>

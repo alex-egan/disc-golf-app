@@ -13,7 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
-const pages = ['Courses', 'Map'];
+const pages = ['New Round','Courses', 'Map'];
 const loginMenu = [ 'Login' ];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -46,6 +46,8 @@ function ResponsiveAppBar() {
       window.location.replace(`/map`);
     else if (page == "Login")
       window.location.replace(`/login`);
+    else if (page == "New Round")
+      window.location.replace(`/rounds`);
 
     setAnchorElNav(null);
   };

@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 function Home() {
     return (
       <div class="home">
-        <span>Test Home Page</span>
+   <button> Past Scores Here</button>
       </div>
     );
 }

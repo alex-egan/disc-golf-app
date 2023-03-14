@@ -6,6 +6,7 @@ import NavBar from './components/NavBar';
 import Map from './components/Map';
 import Course from './components/Course';
 import Home from './components/Home';
+import Rounds from './components/Rounds';
 import './App.css';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home></Home>} />
+            <Route path="/rounds" element = {<Rounds></Rounds>}/>
             <Route path="/login" element={<Login></Login>}></Route>
             <Route path="/courses/:id" element={<Course></Course>} />
             <Route path="/map" element={<Map></Map>} />
